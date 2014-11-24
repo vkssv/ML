@@ -15,14 +15,13 @@ function plotData(x, y)
 %       markers larger by using plot(..., 'rx', 'MarkerSize', 10);
 
 figure; % open a new figure window
-data = load('ex1data1.txt');
-X = data(:, 1); y = data(:, 2);
-m = length(y);
-plot(X, y, 'rx', 'MarkerSize', 5);
-xbounds = xlim();
-set(gca, 'xtick', xbounds(1):2.0:xbounds(2))
-ylabel('Profit in $10,000s');
-xlabel('Population of City in 10,000s');
+
+
+plot(x,y, "bp", "MarkerSize", 5);
+legend('profit in $10K');
+% hold on;
+% hypoteses = (theta'*X')';
+% plot(X(:,2),h,"m;hypoteses;","linewidth",3);
 
 
 % ============================================================

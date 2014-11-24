@@ -106,6 +106,12 @@ fprintf('\n');
 % not need to be normalized.
 price = 0; % You should change this
 
+x = [1650 3];
+X = data(:, 1:2);
+X = [X;x];
+[X mu sigma] = featureNormalize(X);
+x = [ones(1, 1) X(size(X,1),:)];
+price = theta'*x';
 
 % ============================================================
 
@@ -151,9 +157,25 @@ fprintf('\n');
 % ====================== YOUR CODE HERE ======================
 price = 0; % You should change this
 
+x = [1 1650 3];
+price = theta'*x';
 
 % ============================================================
 
 fprintf(['Predicted price of a 1650 sq-ft, 3 br house ' ...
          '(using normal equations):\n $%f\n'], price);
+
+% ============================================================
+
+figure;
+alphas = [0.03 0.01 0.3 0.1];
+for i = 1:length(alphas)
+  theta = zeros(3, 1);
+  alpha = alphas(i);
+  [theta, J_history] = gradientDescentMulti(X, y, theta, alpha, num_iters);
+  plot(1:numel(J_history), J_history, '-b', 'LineWidth', 2);
+  hold on;
+end;
+
+
 
